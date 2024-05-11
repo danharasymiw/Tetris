@@ -137,8 +137,7 @@ def on_forever():
     global piece_x, piece_y, pieces, curr_piece, piece_num, is_playing
     while True:
         while True:
-            led.plot(0, 0)
-            basic.pause(500)
+            basic.pause(750)
             basic.clear_screen()
             
             piece_y = piece_y + 1

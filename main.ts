@@ -147,8 +147,7 @@ basic.forever(function on_forever() {
     
     while (true) {
         while (true) {
-            led.plot(0, 0)
-            basic.pause(500)
+            basic.pause(750)
             basic.clearScreen()
             piece_y = piece_y + 1
             if (piece_collides(piece_x, piece_y)) {
