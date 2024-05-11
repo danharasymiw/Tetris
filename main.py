@@ -16,8 +16,8 @@ piece_x = 2
 piece_y = -2
 
 piece_1 = [
-    [0, 1],
-    [0, 1]
+    [1, 0],
+    [1, 0]
 ]
 
 piece_2 = [
@@ -25,13 +25,18 @@ piece_2 = [
     [1, 1]
 ]
 
-pieces = [piece_1, piece_2]
+piece_3 = [
+    [1, 0],
+    [0, 0]
+]
+
+pieces = [piece_1, piece_2, piece_3]
 
 board_indexes = [0, 1, 2, 3, 4]
 reversed_board_indexes = [4, 3, 2, 1, 0]
 piece_indexes = [0, 1]
 
-curr_piece = pieces[randint(0, 1)]
+curr_piece = pieces[randint(0, 2)]
 
 piece_num = 1
 
@@ -51,6 +56,7 @@ def draw_board():
 
 def redraw():
     basic.clear_screen()
+    # led.plot(0, 0)
     draw_board()
     draw_piece()
 
@@ -67,7 +73,7 @@ def add_piece_to_board():
                 board[y + piece_y][x + piece_x] = piece_num
     piece_y = -2
     piece_x = 2
-    curr_piece = pieces[randint(0, 1)]
+    curr_piece = pieces[randint(0, 2)]
 
     return True
 
@@ -126,7 +132,8 @@ def piece_on_board(x, y):
     global curr_piece
     for piece_y in piece_indexes:
         for piece_x in piece_indexes:
-            if not on_board(piece_x + x, piece_y + y):
+            if curr_piece[piece_y][piece_x] and \
+                not on_board(piece_x + x, piece_y + y):
                 return False
     return True
 
@@ -139,7 +146,6 @@ def on_forever():
         while True:
             basic.pause(750)
             basic.clear_screen()
-            
             piece_y = piece_y + 1
 
             if piece_collides(piece_x, piece_y):

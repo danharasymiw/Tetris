@@ -6,13 +6,14 @@ function new_board(): number[][] {
 let board = new_board()
 let piece_x = 2
 let piece_y = -2
-let piece_1 = [[0, 1], [0, 1]]
+let piece_1 = [[1, 0], [1, 0]]
 let piece_2 = [[0, 0], [1, 1]]
-let pieces = [piece_1, piece_2]
+let piece_3 = [[1, 0], [0, 0]]
+let pieces = [piece_1, piece_2, piece_3]
 let board_indexes = [0, 1, 2, 3, 4]
 let reversed_board_indexes = [4, 3, 2, 1, 0]
 let piece_indexes = [0, 1]
-let curr_piece = pieces[randint(0, 1)]
+let curr_piece = pieces[randint(0, 2)]
 let piece_num = 1
 function draw_piece() {
     
@@ -39,6 +40,7 @@ function draw_board() {
 
 function redraw() {
     basic.clearScreen()
+    //  led.plot(0, 0)
     draw_board()
     draw_piece()
 }
@@ -61,7 +63,7 @@ function add_piece_to_board(): boolean {
     }
     piece_y = -2
     piece_x = 2
-    curr_piece = pieces[randint(0, 1)]
+    curr_piece = pieces[randint(0, 2)]
     return true
 }
 
@@ -130,7 +132,7 @@ function piece_on_board(x: any, y: number): boolean {
     
     for (let piece_y of piece_indexes) {
         for (let piece_x of piece_indexes) {
-            if (!on_board(piece_x + x, piece_y + y)) {
+            if (curr_piece[piece_y][piece_x] && !on_board(piece_x + x, piece_y + y)) {
                 return false
             }
             
